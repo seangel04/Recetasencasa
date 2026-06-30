@@ -12,6 +12,10 @@ services:
       DATABASE_FILE: /app/data/dev.db
       DATABASE_URL: "file:/app/data/dev.db"
       AUTH_TRUST_HOST: "true"
+      # url publica con la que auth.js arma los redirects. detras de nginx hay
+      # que fijarla a mano o usa 0.0.0.0:3000 (el bind del server). en local
+      # vale localhost; en el VPS se pisa con AUTH_URL en el .env
+      AUTH_URL: "${AUTH_URL:-http://localhost:3000}"
       # secretos: cambialos en el VPS (ver .env.example)
       NEXTAUTH_SECRET: "${NEXTAUTH_SECRET:-cambia-esto-por-un-secreto-largo-y-aleatorio}"
       ADMIN_USERNAME: "${ADMIN_USERNAME:-admin}"
