@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Recipe {
+  id           String          @id @default(cuid())
+  title        String
+  description  String?
+  image        String?
+  ingredients  String
+  instructions String
+  prepTime     Int?
+  servings     Int?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  calendar     CalendarEntry[]
+}
+
+model CalendarEntry {
+  id       String   @id @default(cuid())
+  date     String   @unique
+  recipeId String
+  recipe   Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+}

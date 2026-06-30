@@ -32,10 +32,25 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
 
+# base de datos sqlite (NO se sube; se crea al levantar docker compose)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+/prisma/dev.db
+/data
+
+# imagenes subidas en tiempo de ejecucion (se guardan en un volumen)
+/public/recipes/*
+!/public/recipes/.gitkeep
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma

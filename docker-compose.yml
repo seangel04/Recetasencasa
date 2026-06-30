@@ -1,0 +1,23 @@
+services:
+  web:
+    build: .
+    image: recetasencasa
+    container_name: recetasencasa
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      # ruta del archivo sqlite dentro del contenedor (vive en el volumen ./data)
+      DATABASE_FILE: /app/data/dev.db
+      DATABASE_URL: "file:/app/data/dev.db"
+      AUTH_TRUST_HOST: "true"
+      # secretos: cambialos en el VPS (ver .env.example)
+      NEXTAUTH_SECRET: "${NEXTAUTH_SECRET:-cambia-esto-por-un-secreto-largo-y-aleatorio}"
+      ADMIN_USERNAME: "${ADMIN_USERNAME:-admin}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD:-recetas123}"
+    volumes:
+      # la base de datos se crea aqui al levantar y persiste entre reinicios
+      - ./data:/app/data
+      # las fotos subidas por el administrador persisten aqui
+      - ./data/recipes:/app/public/recipes

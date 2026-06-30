@@ -1,0 +1,11 @@
+# Normaliza saltos de linea. Los scripts e imagenes de docker corren en Linux
+# y DEBEN quedar con LF aunque se editen en Windows.
+* text=auto eol=lf
+*.sh text eol=lf
+Dockerfile text eol=lf
+docker-entrypoint.sh text eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
