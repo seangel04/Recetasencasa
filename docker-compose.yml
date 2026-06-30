@@ -17,7 +17,8 @@ services:
       ADMIN_USERNAME: "${ADMIN_USERNAME:-admin}"
       ADMIN_PASSWORD: "${ADMIN_PASSWORD:-recetas123}"
     volumes:
-      # la base de datos se crea aqui al levantar y persiste entre reinicios
-      - ./data:/app/data
+      # la base de datos se crea aqui al levantar y persiste entre reinicios.
+      # RECETAS_DATA_DIR apunta a un sitio fuera del repo en el VPS (ver .env)
+      - "${RECETAS_DATA_DIR:-./data}:/app/data"
       # las fotos subidas por el administrador persisten aqui
-      - ./data/recipes:/app/public/recipes
+      - "${RECETAS_DATA_DIR:-./data}/recipes:/app/public/recipes"
